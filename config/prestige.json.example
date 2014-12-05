@@ -1,0 +1,19 @@
+{
+  "prestidigitation": {
+    "tracking": {
+      "host": "example.com",
+      "apiKey": "abcd1234",
+      "protocol": "https",
+      "port": 443,
+      "sslCaCert": "/path/to/ca/cert.pem",
+      "sslClientCert": "/path/to/cert.pem",
+      "sslClientKey": "/path/to/client.key"
+    },
+    "gitlab": {
+      "url": "https://example.com",
+    },
+    "jenkins": {
+      "url": "https://example.com"
+    }
+  }
+}
