@@ -1,2 +1,7 @@
 node_modules
 config/*.json
+plato
+karma
+mocha
+log/*.log
+npm-debug.log

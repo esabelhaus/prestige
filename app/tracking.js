@@ -9,8 +9,12 @@ nconf.file({ file: 'config/prestige.json' });
 
 var config = nconf.get('prestidigitation:tracking');
 
-exports.updateIssue = function(projectID, data, key) {
+exports.updateIssue = function(projectID, data, key, host) {
   config.apiKey = key;
+
+  if (host) {
+    config.host = host;
+  }
 
   var redmineApi = new Redmine(config);
 
