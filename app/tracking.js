@@ -1,6 +1,9 @@
 var Redmine = require('promised-redmine');
 var nconf = require('nconf');
 
+(function(){
+  "use strict";
+
 //grab our prestige configuraton
 nconf.file({ file: 'config/prestige.json' });
 
@@ -14,35 +17,34 @@ exports.updateIssue = function(projectID, data, key) {
   redmineApi.getProjects()
   .success(function(projects){ // success is an alias of then whithout the promise rejection management in D.js the underlying promise library
     for (var project in projects.projects) {
-      console.log("1")
-      if (projects.projects[project].identifier === projectID) {
-        var projectName = projects.projects[project].name;
-        console.log("2")
-        if (data.total_commits_count >= 3) {
-          multiUpdate(redmineApi, data, projectName)
-        } else if (data.total_commits_count < 3 && data.total_commits_count > 0) {
-          singleUpdate(redmineApi, data, projectName)
-        }
-      }
+      commitSize(redmineApi, data, projectID, projects, project);
     }
-  })
+  });
+};
+
+var commitSize = function(redmineApi, data, projectID, projects, project) {
+  if (projects.projects[project].identifier === projectID) {
+    var projectName = projects.projects[project].name;
+    if (data.total_commits_count >= 3) {
+      multiUpdate(redmineApi, data, projectName);
+    } else if (data.total_commits_count < 3 && data.total_commits_count > 0) {
+      singleUpdate(redmineApi, data, projectName);
+    }
+  }
 };
 
 var singleUpdate = function(redmineApi, data, projectName) {
-  console.log("6");
-  var issueID = data.commits[0].message.match(/(#\d{1,8})/g)[0].replace(/#/, '')
+  var issueID = data.commits[0].message.match(/(#\d{1,8})/g)[0].replace(/#/, '');
   if (issueID !== null) {
-    doUpdate(redmineApi, data, projectName)
+    doUpdate(redmineApi, data, projectName);
   }
 };
 
 var multiUpdate = function(redmineApi, data, projectName) {
-  console.log("3")
   for (var i = 0; i < data.total_commits_count -1; i++) {
-    console.log("4")
-    var issueID = data.commits[i].message.match(/(#\d{1,8})/g)[0].replace(/#/, '')
+    var issueID = data.commits[i].message.match(/(#\d{1,8})/g)[0].replace(/#/, '');
     if (issueID !== null) {
-      doUpdate(redmineApi, issueID, data, projectName)
+      doUpdate(redmineApi, issueID, data, projectName);
     }
   }
 };
@@ -50,33 +52,30 @@ var multiUpdate = function(redmineApi, data, projectName) {
 var doUpdate = function(redmineApi, issueID, data, projectName) {
   var message = {
     "notes": "Commit: " + data.commits[0].id + "\nMessage: " + data.commits[0].message + "\nAuthor: " + data.commits[0].author.name
-  }
-  console.log("7")
+  };
   redmineApi.getIssue(issueID)
   .success(function(issue){
-    console.log("8")
     sameProject(issue, projectName, function(response) {
-      console.log("9")
       if (response === true) {
         redmineApi.updateIssue(issueID, message)
         .success(function(response){
-          console.log("Updated issue: " + issueID + "\nresponse was: " + response)
-        })
+          console.log("Updated issue: " + issueID + "\nresponse was: " + response);
+        });
       } else {
-        console.log("issue is not in project: " + projectName)
+        console.log("issue is not in project: " + projectName);
       }
-    })
+    });
   })
   .error(function(error){
-    console.log(error)
-  })
+    console.log(error);
+  });
 };
 
 var sameProject = function(issue, projectName, callback) {
   if (issue.project.name === projectName) {
-    callback(true)
+    callback(true);
   } else {
-    callback(false)
+    callback(false);
   }
 };
 
@@ -89,6 +88,9 @@ exports.issues = function(key) {
   .success(function(issues){ // success is an alias of then whithout the promise rejection management in D.js the underlying promise library
     console.log(issues);
   })
+  .error(function(error){
+    console.log(error);
+  });
 };
 
 exports.projects = function(key) {
@@ -100,9 +102,12 @@ exports.projects = function(key) {
   .success(function(projects){ // success is an alias of then whithout the promise rejection management in D.js the underlying promise library
     console.log(projects);
   })
-
+  .error(function(error){
+    console.log(error);
+  });
 };
 
+})();
 
 /*
 redmineApi.getIssues()

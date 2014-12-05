@@ -1,10 +1,13 @@
-var express = require('express')
-  ,  router = express.Router()
-  ,  https = require('https')
-  ,  tracking = require('../app/tracking')
-  ,  sc = require('../app/sc')
-  ,  ci = require('../app/ci')
-;
+var express = require('express'),
+    router = express.Router(),
+    https = require('https'),
+    tracking = require('../app/tracking'),
+    sc = require('../app/sc'),
+    ci = require('../app/ci');
+
+
+(function(){
+  "use strict";
 
 //handle requests from source control
 router.post('/sc/:project/:key', function(req, res) {
@@ -15,7 +18,7 @@ router.post('/sc/:project/:key', function(req, res) {
   tracking.updateIssue(project, postCommit, key);
 
   res.writeHead(200);
-  res.end("Got it!")
+  res.end("Got it!");
 
 });
 
@@ -30,3 +33,5 @@ router.post('/ci/:project/:key', function(req,res) {
 });
 
 module.exports = router;
+
+})();
