@@ -1,8 +1,6 @@
 var express = require('express'),
     app = express(),
     path = require('path'),
-    favicon = require('serve-favicon'),
-    logger = require('morgan'),
     cookieParser = require('cookie-parser'),
     bodyParser = require('body-parser'),
     nconf = require('nconf'),
@@ -11,7 +9,7 @@ var express = require('express'),
 
 (function(){
   "use strict";
-  
+
 nconf.file({ file: 'config/app.json' });
 
 app.use(logger('dev'));

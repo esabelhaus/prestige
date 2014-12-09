@@ -30,6 +30,14 @@ module.exports = function(grunt) {
         }
       }
     },
+    shell: {
+        options: {
+            stderr: false
+        },
+        target: {
+            command: 'istanbul cover test/**/*js'
+        }
+    },
     forever: {
       prestige:{
         options: {
@@ -39,10 +47,18 @@ module.exports = function(grunt) {
       }
     }
   });
+  //grunt
+  grunt.registerTask('default', ['jshint', 'plato:coverage', 'shell']);
+  //start and stop
   grunt.registerTask('start', ['forever:prestige:start']);
   grunt.registerTask('stop', ['forever:prestige:stop']);
-  grunt.registerTask('default', ['jshint', 'plato:coverage', 'mochaTest']);
+  //individual testing tasks
   grunt.registerTask('plato', ['plato:coverage']);
+  grunt.registerTask('mocha', ['mochaTest']);
+  grunt.registerTask('coverage', ['shell']);
+
+  //load packages
+  grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-plato');
   grunt.loadNpmTasks('grunt-forever');

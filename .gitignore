@@ -1,7 +1,7 @@
 node_modules
 config/*.json
 plato
-karma
 mocha
+coverage
 log/*.log
 npm-debug.log

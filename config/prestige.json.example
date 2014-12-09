@@ -9,10 +9,10 @@
       "sslClientCert": "/path/to/cert.pem",
       "sslClientKey": "/path/to/client.key"
     },
-    "gitlab": {
+    "sc": {
       "url": "https://example.com",
     },
-    "jenkins": {
+    "ci": {
       "url": "https://example.com"
     }
   }
