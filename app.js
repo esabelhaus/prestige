@@ -1,6 +1,7 @@
 var express = require('express'),
     app = express(),
     path = require('path'),
+    logger = require('morgan'),
     cookieParser = require('cookie-parser'),
     bodyParser = require('body-parser'),
     nconf = require('nconf'),
