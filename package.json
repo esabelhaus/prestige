@@ -1,6 +1,6 @@
 {
   "name": "prestige",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Server designed to connect distributed applications via their REST API",
   "main": "index.js",
   "dependencies": {
