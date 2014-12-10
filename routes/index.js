@@ -1,8 +1,7 @@
 var express = require('express'),
     router = express.Router(),
-    https = require('https'),
     tracking = require('../app/tracking'),
-    sc = require('../app/sc'),
+    //sc = require('../app/sc'),
     ci = require('../app/ci'),
     nconf = require('nconf');
 
@@ -15,24 +14,27 @@ var express = require('express'),
   var ci_config = nconf.get('prestidigitation:ci');
 
   //handle requests from source control
-  router.post('/sc/:task/:project/:key/:user', function(req, res) {
+  router.post('/sc/tracking/:project/:key', function(req, res) {
     var project = req.params.project;
     var key = req.params.key;
-    var task = req.params.task;
-    var user = req.params.user;
     var postCommit = req.body;
 
-    if (task === "tracking") {
-      tracking.updateIssue(tracking_config, project, postCommit, key, function(res, err) {
-        if (!err) {
-          console.log(res);
-        } else {
-          console.log(err);
-        }
-      });
-    } else if (task === "ci") {
-      
-    }
+    tracking.updateIssue(tracking_config, project, postCommit, key, function(res, err) {
+      if (!err) {
+        console.log(res);
+      } else {
+        console.log(err);
+      }
+    });
+
+    res.writeHead(200);
+    res.end("Got it!");
+  });
+
+  router.post('/sc/ci/:project/:key/:user', function(req, res) {
+    var project = req.params.project;
+    var key = req.params.key;
+    var postCommit = req.body;
 
     res.writeHead(200);
     res.end("Got it!");

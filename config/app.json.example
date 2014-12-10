@@ -1,9 +1,0 @@
-{
-  "config":{
-    "hostname": "https://example.com",
-    "port": 3000,
-    "ssl_enabled": true,
-    "ssl_ca_cert": "/path/to/cert.crt",
-    "ssl_client_cert": "/path/to/cert.pem"
-  }
-}
