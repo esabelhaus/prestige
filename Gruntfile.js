@@ -40,7 +40,7 @@ module.exports = function(grunt) {
     }
   });
   //grunt
-  grunt.registerTask('default', ['jshint', 'plato:coverage']);
+  grunt.registerTask('default', ['jshint', 'mochaTest']);
   //start and stop
   grunt.registerTask('start', ['forever:prestige:start']);
   grunt.registerTask('stop', ['forever:prestige:stop']);
