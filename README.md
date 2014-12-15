@@ -4,12 +4,17 @@ A Server designed to connect distributed applications via their REST API
 [![Build Status](https://travis-ci.org/e-sabelhaus/prestige.svg)](https://travis-ci.org/e-sabelhaus/prestige)
 
 ## The Gist... for now
-Still working through how this will look. Currently, Gitlab talks to Redmine, updating issues based off commit messages in a post commit hook. I am going to start working on getting Gitlab to talk to Jenkins, and start a build on a particular job based off a post commit hook.
+Still working through how this will look. Currently, Gitlab talks to Redmine, updating issues based off commit messages in a post commit hook. Now Gitlab to talk to Jenkins, and starts a build on a particular job based off a post commit hook.
 
 ## About
-Currently, you can submit a post from gitlab's web hooks to:
 
-* `http://myhost/sc/tracking/[redmine project identifier]/[user account api key]`
+### Gitlab to Redmine
+Create a web hook on Gitlab which points to:
+
+* `http://myhost/sc/tracking/PROJECT_IDENTIFIER/KEY`
+
+* `project_identifier` is the url path to the project in redmine
+* `key` is your personal account API key
 
 This will accept a post commit hook from gitlab and update Redmine issues in the commit messages denoted by: `#12345678`
 
@@ -19,6 +24,14 @@ Commit: fcc2fd1d57a61d75b64d212ed56c040903b76612
 Message: How well does this work #2376
 Author: Eric Sabelhaus
 ```
+
+### Gitlab to Jenkins
+Create a web hook on Gitlab which points to:
+ * `http://myhost/sc/ci/JOB/JOB_KEY`
+ * `job` is the Jenkins job name from your CI server
+ * `job_key` is used to access the project via https://wiki.jenkins-ci.org/display/JENKINS/Build+Token+Root+Plugin
+
+ If you have the string `#build` in your commit message of that push, it will initiate a build on that project, rather then setting the CI server to poll your SCM constantly.
 
 ## Configuration
 In the config directory, there are two json files,
