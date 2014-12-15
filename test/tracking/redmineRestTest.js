@@ -4,9 +4,7 @@ var assert = require('assert'),
     nock = require('nock'),
     expect = chai.expect,
     should = chai.should(),
-    tracking = require('../../app/tracking');
-    //sc = require('../app/sc'),
-    //ci = require('../app/ci');
+    tracking = require('../../lib/tracking');
 
 (function(){
   "use strict";
@@ -330,7 +328,7 @@ var assert = require('assert'),
       "statusCode": 200
     });
 
-  console.log("TEST: successful single update");
+  console.log("TRACKING:TEST: successful single update");
   tracking.updateIssue({
     "host": "redmine.com",
     "apiKey": "abcd1234",
@@ -346,7 +344,7 @@ var assert = require('assert'),
       should.not.exist(err);
     });
 
-  console.log("TEST: no commits");
+  console.log("TRACKING:TEST: no commits");
   tracking.updateIssue({
     "host": "redmine.com",
     "apiKey": "abcd1234",
@@ -362,7 +360,7 @@ var assert = require('assert'),
       should.not.exist(err);
     });
 
-  console.log("TEST: successful update, project name not matching");
+  console.log("TRACKING:TEST: successful update, project name not matching");
   tracking.updateIssue({
     "host": "2redmine.com",
     "apiKey": "abcd1234",
@@ -378,7 +376,7 @@ var assert = require('assert'),
       should.not.exist(err);
     });
 
-  console.log("TEST: successful multi-update");
+  console.log("TRACKING:TEST: successful multi-update");
   tracking.updateIssue({
     "host": "2redmine.com",
     "apiKey": "abcd1234",
@@ -394,7 +392,7 @@ var assert = require('assert'),
       should.not.exist(err);
     });
 
-  console.log("TEST: bad update, no issue number");
+  console.log("TRACKING:TEST: bad update, no issue number");
   tracking.updateIssue({
     "host": "redmine.com",
     "apiKey": "abcd1234",
@@ -410,7 +408,7 @@ var assert = require('assert'),
       should.not.exist(err);
     });
 
-  console.log("TEST: bad update, no key");
+  console.log("TRACKING:TEST: bad update, no key");
   tracking.updateIssue({
       "host": "redmine.com",
       "apiKey": "abcd1234",
@@ -425,7 +423,7 @@ var assert = require('assert'),
       err.should.contain("MISSING: config, projectID, or key!");
     });
 
-  console.log("TEST: good get issues request");
+  console.log("TRACKING:TEST: good get issues request");
   tracking.issues({
       "host": "redmine.com",
       "apiKey": "abcd1234",
@@ -438,7 +436,7 @@ var assert = require('assert'),
       res.should.be.an('object');
   });
 
-  console.log("TEST: bad get issues request");
+  console.log("TRACKING:TEST: bad get issues request");
   tracking.issues({
     "host": "redmine.com",
     "apiKey": "abcd1234",
@@ -451,7 +449,7 @@ var assert = require('assert'),
     err.should.contain("MISSING: config or key!");
   });
 
-  console.log("TEST: good get projects request");
+  console.log("TRACKING:TEST: good get projects request");
   tracking.projects({
     "host": "redmine.com",
     "apiKey": "abcd1234",
@@ -464,7 +462,7 @@ var assert = require('assert'),
     res.should.be.an('object');
   });
 
-  console.log("TEST: bad get projects request");
+  console.log("TRACKING:TEST: bad get projects request");
   tracking.projects({
     "host": "redmine.com",
     "apiKey": "abcd1234",

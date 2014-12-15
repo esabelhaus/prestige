@@ -1,13 +1,7 @@
 {
   "config":{
-    "hostname": "https://example.com",
-    "port": 3000,
-    "ssl": {
-      "enabled": true,
-      "ssl_ca_cert": "/path/to/ca/cert.crt",
-      "ssl_client_cert": "/path/to/client/cert.pem",
-      "ssl_client_key": "/path/to/client.key"
-    }
+    "hostname": "http://example.com",
+    "port": 3000
   },
   "prestidigitation": {
     "tracking": {
@@ -20,8 +14,6 @@
     },
     "sc": {
       "url": "https://example.com",
-      "protocol": "https",
-      "port": 443,
       "sslCaCert": "/path/to/ca/cert.pem",
       "sslClientCert": "/path/to/cert.pem",
       "sslClientKey": "/path/to/client.key"
@@ -30,9 +22,11 @@
       "host": "example.com",
       "protocol": "https",
       "port": 443,
+      "sslEnabled": "true",
       "sslCaCert": "/path/to/ca/cert.pem",
       "sslClientCert": "/path/to/cert.pem",
-      "sslClientKey": "/path/to/client.key"
+      "sslClientKey": "/path/to/client.key",
+      "passphrase": "keep it secret"
     }
   }
 }

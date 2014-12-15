@@ -3,7 +3,7 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     jshint: {
       // define the files to lint
-      files: ['routes/*.js', 'app/*.js', 'app.js'],
+      files: ['routes/*.js', 'lib/*.js', 'app.js'],
       // configure JSHint (documented at http://www.jshint.com/docs/)
       options: {
         maxdepth: 2,
@@ -30,14 +30,6 @@ module.exports = function(grunt) {
         }
       }
     },
-    shell: {
-        options: {
-            stderr: false
-        },
-        target: {
-            command: 'istanbul cover test/**/*js'
-        }
-    },
     forever: {
       prestige:{
         options: {
@@ -48,7 +40,7 @@ module.exports = function(grunt) {
     }
   });
   //grunt
-  grunt.registerTask('default', ['jshint', 'plato:coverage', 'shell']);
+  grunt.registerTask('default', ['jshint', 'plato:coverage']);
   //start and stop
   grunt.registerTask('start', ['forever:prestige:start']);
   grunt.registerTask('stop', ['forever:prestige:stop']);

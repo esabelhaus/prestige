@@ -1,8 +1,8 @@
 var express = require('express'),
     router = express.Router(),
-    tracking = require('../app/tracking'),
-    //sc = require('../app/sc'),
-    ci = require('../app/ci'),
+    tracking = require('../lib/tracking'),
+    //sc = require('../lib/sc'),
+    ci = require('../lib/ci'),
     nconf = require('nconf');
 
 (function(){
@@ -31,10 +31,18 @@ var express = require('express'),
     res.end("Got it!");
   });
 
-  router.post('/sc/ci/:project/:key/:user', function(req, res) {
-    var project = req.params.project;
+  router.post('/sc/ci/:job/:key', function(req, res) {
+    var job = req.params.job;
     var key = req.params.key;
     var postCommit = req.body;
+
+    ci.startBuild(ci_config, postCommit, job, key, function(res, err) {
+      if (!err) {
+        console.log(res);
+      } else {
+        console.log(err);
+      }
+    });
 
     res.writeHead(200);
     res.end("Got it!");
