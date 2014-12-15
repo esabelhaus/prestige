@@ -1,6 +1,7 @@
 # Prestige
 A Server designed to connect distributed applications via their REST API
 
+[![Build Status](https://travis-ci.org/e-sabelhaus/prestige.svg)](https://travis-ci.org/e-sabelhaus/prestige)
 
 ## The Gist... for now
 Still working through how this will look. Currently, Gitlab talks to Redmine, updating issues based off commit messages in a post commit hook. I am going to start working on getting Gitlab to talk to Jenkins, and start a build on a particular job based off a post commit hook.
