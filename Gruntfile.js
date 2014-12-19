@@ -50,7 +50,6 @@ module.exports = function(grunt) {
   grunt.registerTask('coverage', ['shell']);
 
   //load packages
-  grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-plato');
   grunt.loadNpmTasks('grunt-forever');
