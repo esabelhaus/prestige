@@ -4,7 +4,7 @@ var assert = require('assert'),
     nock = require('nock'),
     expect = chai.expect,
     should = chai.should(),
-    tracking = require('../../lib/tracking');
+    tracking = require('../../lib/prestige/tracking');
 
 (function(){
   "use strict";

@@ -4,7 +4,7 @@ var assert = require('assert'),
     nock = require('nock'),
     expect = chai.expect,
     should = chai.should(),
-    ci = require('../../lib/ci.js');
+    ci = require('../../lib/prestige/ci.js');
 
 (function(){
   "use strict";

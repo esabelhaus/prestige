@@ -12,7 +12,7 @@ Still working through how this will look. Currently, Gitlab talks to Redmine, up
 ### Gitlab to Redmine
 Create a web hook on Gitlab which points to:
 
-* `http://myhost/sc/tracking/PROJECT_IDENTIFIER/KEY`
+* `http://myhost/sc/tracking?project=PROJECT_IDENTIFIER&key=KEY`
 
 * `project_identifier` is the url path to the project in redmine
 * `key` is your personal account API key
@@ -28,7 +28,7 @@ Author: Eric Sabelhaus
 
 ### Gitlab to Jenkins
 Create a web hook on Gitlab which points to:
- * `http://myhost/sc/ci/JOB/JOB_KEY`
+ * `http://myhost/sc/ci?job=JOB&key=JOB_KEY`
  * `job` is the Jenkins job name from your CI server
  * `job_key` is used to access the project via https://wiki.jenkins-ci.org/display/JENKINS/Build+Token+Root+Plugin
 
@@ -47,8 +47,39 @@ Prestige dictates how the different app files operate. For now, the only nested 
 ### install
 `npm install prestige`
 
-### start
+### setup
+```
+var express = require('express'),
+    app = express(),
+    logger = require('morgan'),
+    cookieParser = require('cookie-parser'),
+    bodyParser = require('body-parser'),
+    Prestige = require('./lib/prestige');
+
+(function(){
+  "use strict";
+
+  app.use(logger('dev'));
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({ extended: false }));
+  app.use(cookieParser());
+
+  var prestige = new Prestige(app);
+
+  app.listen(3000);
+
+})();
+```
+
+# Contributions
+
+##Fork it, write your code, test early, test often.
+
+### code of conduct
+I use a combination of Mocha, Chai, and Nock to build out mock endpoints to validate my function calls are properly executed on the intended service to be leveraged. I also use istanbul to validate that 100% code coverage exists before merging a pull request.
+
+### start the app
 `grunt start`
 
-## issues
+# issues
 https://github.com/e-sabelhaus/prestige/issues
