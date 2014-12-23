@@ -127,30 +127,29 @@ var assert = require('assert'),
     "total_commits_count": 3
   };
 
-  var redServPost = nock('http://jenkins.com/')
+  var ciServPost = nock('http://jenkins.com/')
   .filteringRequestBody(function(path) {
     return '*';
   })
   .persist()
   .post('/buildByToken/build?job=foobar&token=foobarbaz')
-  .times(3)
-  .reply(200, {
-    "statusCode": 200
-  });
+  .reply(201, {
+    "statusCode": 201
+  })
+  .post('/buildByToken/build?job=foobar&token=foo')
+  .reply(404);
 
-  var redServPost2 = nock('https://jenkins.com/')
+  var ciServPost2 = nock('https://jenkins.com/')
   .filteringRequestBody(function(path) {
     return '*';
   })
   .persist()
   .post('/buildByToken/build?job=foobar&token=foobarbaz')
-  .times(3)
-  .reply(200, {
-    "statusCode": 200
+  .reply(201, {
+    "statusCode": 201
   });
 
   console.log('CI:TEST: Successful Build HTTPS');
-
   ci.startBuild({
     "host": "jenkins.com",
     "protocol": "https",
@@ -170,7 +169,6 @@ var assert = require('assert'),
   });
 
   console.log('CI:TEST: Successful Build HTTP');
-
   ci.startBuild({
     "host": "jenkins.com",
     "protocol": "http",
@@ -187,7 +185,6 @@ var assert = require('assert'),
   });
 
   console.log('CI:TEST: Successful Post Commit No Build HTTP');
-
   ci.startBuild({
     "host": "jenkins.com",
     "protocol": "http",
@@ -204,7 +201,6 @@ var assert = require('assert'),
   });
 
   console.log('CI:TEST: Successful Post Commit Multiple Commit');
-
   ci.startBuild({
     "host": "jenkins.com",
     "protocol": "http",
@@ -221,7 +217,6 @@ var assert = require('assert'),
   });
 
   console.log('CI:TEST: Failed Commit, Bad Project Identifier');
-
   ci.startBuild({
     "host": "jenkins.com",
     "protocol": "http",
@@ -233,6 +228,19 @@ var assert = require('assert'),
   'foobarbaz',
   function(res, err){
     should.exist(err);
+    should.not.exist(res);
+  });
+
+  console.log('CI:TEST: Failed Commit, No Config');
+
+  ci.startBuild(
+  undefined,
+  fakePostCommit,
+  'foobar',
+  'foo',
+  function(res, err){
+    should.exist(err);
+    err.should.contain('MISSING: config/prestige.json, please refer to readme for help');
     should.not.exist(res);
   });
 
@@ -249,8 +257,10 @@ var assert = require('assert'),
   'foo',
   function(res, err){
     should.exist(err);
+    err.should.contain('Error Requesting Build!');
     should.not.exist(res);
   });
+
 
   console.log('CI:TEST: Failed Setup, No Project Identifier');
 

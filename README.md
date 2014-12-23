@@ -64,7 +64,7 @@ var express = require('express'),
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(cookieParser());
 
-  var prestige = new Prestige(app);
+  var prestige = new Prestige(app, 'config/prestige.json');
 
   app.listen(3000);
 

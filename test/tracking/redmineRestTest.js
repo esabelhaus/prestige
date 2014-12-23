@@ -328,150 +328,233 @@ var assert = require('assert'),
       "statusCode": 200
     });
 
-  console.log("TRACKING:TEST: successful single update");
-  tracking.updateIssue({
-    "host": "redmine.com",
-    "apiKey": "abcd1234",
-    "protocol": "http",
-    "port": 80
-    },
-    'foobar',
-    fakePostCommit,
-    'abcd1234',
-    function(res, err) {
-      should.exist(res);
-      res.should.contain("Started Issue Update");
-      should.not.exist(err);
+  describe("TRACKING:TEST: Successful Single Update", function() {
+    it('returns a string', function(done){
+      tracking.updateIssue({
+        "host": "redmine.com",
+        "apiKey": "abcd1234",
+        "protocol": "http",
+        "port": 80
+      },
+      'foobar',
+      fakePostCommit,
+      'abcd1234',
+      function(res, err) {
+        should.exist(res);
+        res.should.contain("Started Issue Update");
+        if (err) {
+          done(err);
+        }
+        done();
+      });
     });
-
-  console.log("TRACKING:TEST: no commits");
-  tracking.updateIssue({
-    "host": "redmine.com",
-    "apiKey": "abcd1234",
-    "protocol": "http",
-    "port": 80
-    },
-    'foobar',
-    fakePostNoCommit,
-    'abcd1234',
-    function(res, err) {
-      should.exist(res);
-      res.should.contain("Started Issue Update");
-      should.not.exist(err);
-    });
-
-  console.log("TRACKING:TEST: successful update, project name not matching");
-  tracking.updateIssue({
-    "host": "2redmine.com",
-    "apiKey": "abcd1234",
-    "protocol": "http",
-    "port": 80
-    },
-    'foo',
-    fakePostCommit,
-    'abcd1234',
-    function(res, err) {
-      should.exist(res);
-      res.should.contain("Started Issue Update");
-      should.not.exist(err);
-    });
-
-  console.log("TRACKING:TEST: successful multi-update");
-  tracking.updateIssue({
-    "host": "2redmine.com",
-    "apiKey": "abcd1234",
-    "protocol": "http",
-    "port": 80
-    },
-    'foobar',
-    fakePostMultiCommit,
-    'abcd1234',
-    function(res, err) {
-      should.exist(res);
-      res.should.contain("Started Issue Update");
-      should.not.exist(err);
-    });
-
-  console.log("TRACKING:TEST: bad update, no issue number");
-  tracking.updateIssue({
-    "host": "redmine.com",
-    "apiKey": "abcd1234",
-    "protocol": "http",
-    "port": 80
-    },
-    'foobar',
-    fakePostCommitNoIssue,
-    'abcd1234',
-    function(res, err) {
-      should.exist(res);
-      res.should.contain("Started Issue Update");
-      should.not.exist(err);
-    });
-
-  console.log("TRACKING:TEST: bad update, no key");
-  tracking.updateIssue({
-      "host": "redmine.com",
-      "apiKey": "abcd1234",
-      "protocol": "http",
-      "port": 80
-    },
-    'foobar',
-    fakePostCommit,
-    undefined,
-    function(res, err) {
-      should.exist(err);
-      err.should.contain("MISSING: config, projectID, or key!");
-    });
-
-  console.log("TRACKING:TEST: good get issues request");
-  tracking.issues({
-      "host": "redmine.com",
-      "apiKey": "abcd1234",
-      "protocol": "http",
-      "port": 80
-    },
-    'abcd1234',
-    function(res, err) {
-      should.exist(res);
-      res.should.be.an('object');
   });
 
-  console.log("TRACKING:TEST: bad get issues request");
-  tracking.issues({
-    "host": "redmine.com",
-    "apiKey": "abcd1234",
-    "protocol": "http",
-    "port": 80
-  },
-  undefined,
-  function(res, err) {
-    should.exist(err);
-    err.should.contain("MISSING: config or key!");
+  describe("TRACKING:TEST: No Commits", function() {
+    it('returns a string', function(done){
+      tracking.updateIssue({
+        "host": "redmine.com",
+        "apiKey": "abcd1234",
+        "protocol": "http",
+        "port": 80
+      },
+      'foobar',
+      fakePostNoCommit,
+      'abcd1234',
+      function(res, err) {
+        should.exist(res);
+        res.should.contain("Started Issue Update");
+        if (err) {
+          done(err);
+        }
+        done();
+      });
+    });
   });
 
-  console.log("TRACKING:TEST: good get projects request");
-  tracking.projects({
-    "host": "redmine.com",
-    "apiKey": "abcd1234",
-    "protocol": "http",
-    "port": 80
-  },
-  'abcd1234',
-  function(res, err) {
-    should.exist(res);
-    res.should.be.an('object');
+  describe("TRACKING:TEST: Successful Attempt, Project Name Not Matching", function() {
+    it('returns a string', function(done){
+      tracking.updateIssue({
+        "host": "2redmine.com",
+        "apiKey": "abcd1234",
+        "protocol": "http",
+        "port": 80
+      },
+      'foo',
+      fakePostCommit,
+      'abcd1234',
+      function(res, err) {
+        should.exist(res);
+        res.should.contain("Started Issue Update");
+        if(err){
+          done(err);
+        }
+        done();
+      });
+    });
   });
 
-  console.log("TRACKING:TEST: bad get projects request");
-  tracking.projects({
-    "host": "redmine.com",
-    "apiKey": "abcd1234",
-    "protocol": "http",
-    "port": 80
-  },
-  undefined,
-  function(res, err) {
-    should.exist(err);
-    err.should.contain("MISSING: config or key!");
+  describe("TRACKING:TEST: Successful Multi-Update", function() {
+    it('returns a string', function(done){
+      tracking.updateIssue({
+        "host": "2redmine.com",
+        "apiKey": "abcd1234",
+        "protocol": "http",
+        "port": 80
+      },
+      'foobar',
+      fakePostMultiCommit,
+      'abcd1234',
+      function(res, err) {
+        should.exist(res);
+        res.should.contain("Started Issue Update");
+        if(err){
+          done(err);
+        }
+        done();
+      });
+    });
+  });
+
+  describe("TRACKING:TEST: Successful Attempt, No Issue Number", function() {
+    it('returns a string', function(done){
+      tracking.updateIssue({
+        "host": "redmine.com",
+        "apiKey": "abcd1234",
+        "protocol": "http",
+        "port": 80
+      },
+      'foobar',
+      fakePostCommitNoIssue,
+      'abcd1234',
+      function(res, err) {
+        should.exist(res);
+        res.should.contain("Started Issue Update");
+        if(err){
+          done(err);
+        }
+        done();
+      });
+    });
+  });
+
+  describe("TRACKING:TEST: Bad Update, No Key", function() {
+    it('returns a string', function(done){
+      tracking.updateIssue({
+        "host": "redmine.com",
+        "apiKey": "abcd1234",
+        "protocol": "http",
+        "port": 80
+      },
+      'foobar',
+      fakePostCommit,
+      undefined,
+      function(res, err) {
+        should.exist(err);
+        err.should.contain("MISSING: config, projectID, or key!");
+        if(res){
+          done(res);
+        }
+        done();
+      });
+    });
+  });
+
+  describe("TRACKING:TEST: Bad Update, No Config", function() {
+    it('returns a string', function(done){
+    tracking.updateIssue(
+      undefined,
+      'foobar',
+      fakePostCommit,
+      'abcd1234',
+      function(res, err) {
+        should.exist(err);
+        err.should.contain("MISSING: config/prestige.json, please refer to readme for help");
+        if(res){
+          done(res);
+        }
+        done();
+      });
+    });
+  });
+
+  describe("TRACKING:TEST: good get issues request", function() {
+    it('returns a json object', function(done){
+      tracking.issues({
+        "host": "redmine.com",
+        "apiKey": "abcd1234",
+        "protocol": "http",
+        "port": 80
+      },
+      'abcd1234',
+      function(res, err) {
+        should.exist(res);
+        res.should.be.an('object');
+        if(err){
+          done(err);
+        }
+        done();
+      });
+    });
+  });
+
+  describe("TRACKING:TEST: bad get issues request", function() {
+    it('returns a string', function(done){
+      tracking.issues({
+        "host": "redmine.com",
+        "apiKey": "abcd1234",
+        "protocol": "http",
+        "port": 80
+      },
+      undefined,
+      function(res, err) {
+        should.exist(err);
+        err.should.contain("MISSING: config or key!");
+        if(res){
+          done(res);
+        }
+        done();
+      });
+    });
+  });
+
+  describe("TRACKING:TEST: good get projects request", function() {
+    it('returns a json object', function(done){
+      tracking.projects({
+        "host": "redmine.com",
+        "apiKey": "abcd1234",
+        "protocol": "http",
+        "port": 80
+      },
+      'abcd1234',
+      function(res, err) {
+        should.exist(res);
+        res.should.be.an('object');
+        if(err){
+          done(err);
+        }
+        done();
+      });
+    });
+  });
+
+  describe("TRACKING:TEST: bad get projects request", function() {
+    it('returns a string', function(done){
+      tracking.projects({
+        "host": "redmine.com",
+        "apiKey": "abcd1234",
+        "protocol": "http",
+        "port": 80
+      },
+      undefined,
+      function(res, err) {
+        should.exist(err);
+        err.should.contain("MISSING: config or key!");
+        if(res){
+          done(res);
+        }
+        done();
+      });
+    });
   });
 })();

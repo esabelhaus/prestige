@@ -22,7 +22,7 @@
       "host": "example.com",
       "protocol": "https",
       "port": 443,
-      "sslEnabled": "true",
+      "sslEnabled": true,
       "sslCaCert": "/path/to/ca/cert.pem",
       "sslClientCert": "/path/to/cert.pem",
       "sslClientKey": "/path/to/client.key",

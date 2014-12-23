@@ -3,7 +3,7 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     jshint: {
       // define the files to lint
-      files: ['routes/*.js', 'lib/*.js', 'app.js'],
+      files: ['./lib/**/*.js'],
       // configure JSHint (documented at http://www.jshint.com/docs/)
       options: {
         maxdepth: 2,
@@ -16,9 +16,14 @@ module.exports = function(grunt) {
     plato: {
       coverage: {
         options: {
+          maxdepth: 2,
+          maxcomplexity: 4,
+          strict: true,
+          undef: false,
+          eqeqeq: true
         },
         files: {
-          'plato': ['routes/*.js', 'app/*.js', 'app.js']
+          'plato': ['lib/**/*.js']
         }
       }
     },
