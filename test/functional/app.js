@@ -146,7 +146,7 @@ var express = require('express'),
     limit: 25
   });
 
-describe('POST /sc/ci', function(){
+describe('FUNCTIONAL:TEST POST /sc/ci', function(){
   it('respond with json and return 200', function(done){
     request(app)
     .post('/sc/ci?job=foobar&key=foobarbaz')
@@ -159,7 +159,20 @@ describe('POST /sc/ci', function(){
   });
 });
 
-describe('POST /sc/ci MultiCommit', function(){
+describe('FUNCTIONAL:TEST POST /sc/ci', function(){
+  it('respond with json and return 500', function(done){
+    request(app)
+    .post('/sc/ci')
+    .send(fakePostCommit)
+    .expect(500)
+    .end(function(err, res){
+      if (err) return done(err);
+      done();
+    });
+  });
+});
+
+describe('FUNCTIONAL:TEST POST /sc/ci MultiCommit', function(){
   it('respond with json and return 200', function(done){
     request(app)
     .post('/sc/ci?job=foobar&key=foobarbaz')
@@ -172,7 +185,7 @@ describe('POST /sc/ci MultiCommit', function(){
   });
 });
 
-describe('POST /sc/tracking', function(){
+describe('FUNCTIONAL:TEST POST /sc/tracking', function(){
   it('respond with json and return 200', function(done){
     request(app)
     .post('/sc/tracking?project=foobar&key=foobarbaz')
@@ -185,7 +198,20 @@ describe('POST /sc/tracking', function(){
   });
 });
 
-describe('POST /sc/tracking MultiCommit', function(){
+describe('FUNCTIONAL:TEST POST /sc/tracking', function(){
+  it('respond with json and return 500', function(done){
+    request(app)
+    .post('/sc/tracking')
+    .send(fakePostCommit)
+    .expect(500)
+    .end(function(err, res){
+      if (err) return done(err);
+      done();
+    });
+  });
+});
+
+describe('FUNCTIONAL:TEST POST /sc/tracking MultiCommit', function(){
   it('respond with json and return 200', function(done){
     request(app)
     .post('/sc/tracking?project=foobar&key=foobarbaz')

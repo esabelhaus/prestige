@@ -328,7 +328,7 @@ var assert = require('assert'),
       "statusCode": 200
     });
 
-  describe("TRACKING:TEST: Successful Single Update", function() {
+  describe('TRACKING:TEST Successful Single Update', function() {
     it('returns a string', function(done){
       tracking.updateIssue({
         "host": "redmine.com",
@@ -342,15 +342,13 @@ var assert = require('assert'),
       function(res, err) {
         should.exist(res);
         res.should.contain("Started Issue Update");
-        if (err) {
-          done(err);
-        }
+        if (err) return done(err);
         done();
       });
     });
   });
 
-  describe("TRACKING:TEST: No Commits", function() {
+  describe('TRACKING:TEST No Commits', function() {
     it('returns a string', function(done){
       tracking.updateIssue({
         "host": "redmine.com",
@@ -364,15 +362,13 @@ var assert = require('assert'),
       function(res, err) {
         should.exist(res);
         res.should.contain("Started Issue Update");
-        if (err) {
-          done(err);
-        }
+        if (err) return done(err);
         done();
       });
     });
   });
 
-  describe("TRACKING:TEST: Successful Attempt, Project Name Not Matching", function() {
+  describe('TRACKING:TEST Successful Attempt, Project Name Not Matching', function() {
     it('returns a string', function(done){
       tracking.updateIssue({
         "host": "2redmine.com",
@@ -386,15 +382,13 @@ var assert = require('assert'),
       function(res, err) {
         should.exist(res);
         res.should.contain("Started Issue Update");
-        if(err){
-          done(err);
-        }
+        if (err) return done(err);
         done();
       });
     });
   });
 
-  describe("TRACKING:TEST: Successful Multi-Update", function() {
+  describe('TRACKING:TEST Successful Multi-Update', function() {
     it('returns a string', function(done){
       tracking.updateIssue({
         "host": "2redmine.com",
@@ -408,15 +402,13 @@ var assert = require('assert'),
       function(res, err) {
         should.exist(res);
         res.should.contain("Started Issue Update");
-        if(err){
-          done(err);
-        }
+        if (err) return done(err);
         done();
       });
     });
   });
 
-  describe("TRACKING:TEST: Successful Attempt, No Issue Number", function() {
+  describe('TRACKING:TEST Successful Attempt, No Issue Number', function() {
     it('returns a string', function(done){
       tracking.updateIssue({
         "host": "redmine.com",
@@ -430,15 +422,13 @@ var assert = require('assert'),
       function(res, err) {
         should.exist(res);
         res.should.contain("Started Issue Update");
-        if(err){
-          done(err);
-        }
+        if (err) return done(err);
         done();
       });
     });
   });
 
-  describe("TRACKING:TEST: Bad Update, No Key", function() {
+  describe('TRACKING:TEST Bad Update, No Key', function() {
     it('returns a string', function(done){
       tracking.updateIssue({
         "host": "redmine.com",
@@ -452,15 +442,13 @@ var assert = require('assert'),
       function(res, err) {
         should.exist(err);
         err.should.contain("MISSING: config, projectID, or key!");
-        if(res){
-          done(res);
-        }
+        if (res) return done(res);
         done();
       });
     });
   });
 
-  describe("TRACKING:TEST: Bad Update, No Config", function() {
+  describe('TRACKING:TEST Bad Update, No Config', function() {
     it('returns a string', function(done){
     tracking.updateIssue(
       undefined,
@@ -470,15 +458,13 @@ var assert = require('assert'),
       function(res, err) {
         should.exist(err);
         err.should.contain("MISSING: config/prestige.json, please refer to readme for help");
-        if(res){
-          done(res);
-        }
+        if (res) return done(res);
         done();
       });
     });
   });
 
-  describe("TRACKING:TEST: good get issues request", function() {
+  describe('TRACKING:TEST good get issues request', function() {
     it('returns a json object', function(done){
       tracking.issues({
         "host": "redmine.com",
@@ -490,15 +476,13 @@ var assert = require('assert'),
       function(res, err) {
         should.exist(res);
         res.should.be.an('object');
-        if(err){
-          done(err);
-        }
+        if (err) return done(err);
         done();
       });
     });
   });
 
-  describe("TRACKING:TEST: bad get issues request", function() {
+  describe('TRACKING:TEST bad get issues request', function() {
     it('returns a string', function(done){
       tracking.issues({
         "host": "redmine.com",
@@ -510,15 +494,13 @@ var assert = require('assert'),
       function(res, err) {
         should.exist(err);
         err.should.contain("MISSING: config or key!");
-        if(res){
-          done(res);
-        }
+        if (res) return done(res);
         done();
       });
     });
   });
 
-  describe("TRACKING:TEST: good get projects request", function() {
+  describe('TRACKING:TEST good get projects request', function() {
     it('returns a json object', function(done){
       tracking.projects({
         "host": "redmine.com",
@@ -530,15 +512,13 @@ var assert = require('assert'),
       function(res, err) {
         should.exist(res);
         res.should.be.an('object');
-        if(err){
-          done(err);
-        }
+        if (err) return done(err);
         done();
       });
     });
   });
 
-  describe("TRACKING:TEST: bad get projects request", function() {
+  describe('TRACKING:TEST bad get projects request', function() {
     it('returns a string', function(done){
       tracking.projects({
         "host": "redmine.com",
@@ -550,9 +530,7 @@ var assert = require('assert'),
       function(res, err) {
         should.exist(err);
         err.should.contain("MISSING: config or key!");
-        if(res){
-          done(res);
-        }
+        if (res) return done(res);
         done();
       });
     });
