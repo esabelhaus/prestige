@@ -35,12 +35,10 @@ Create a web hook on Gitlab which points to:
  If you have the string `#build` in your commit message of that push, it will initiate a build on that project, rather then setting the CI server to poll your SCM constantly.
 
 ## Configuration
-In the config directory, there are two json files,
-`/config/app.json.example`, and `/config/prestige.json.example`.
+In the config directory, you will find
+`config/prestige.json.example`.
 
-App dictates the hostname, port, and whether you are using SSL for inbound traffic (I am going to implement this later, sorry)
-
-Prestige dictates how the different app files operate. For now, the only nested object in `prestidigitation` that matters is tracking (short for issue tracking). the only required field is really the `host`. If you use SSL on your redmine server, you must specify all of the ssl fields properly, and the user running prestige must be able to access these files.
+Prestige performs all the specified communications based off this config. The nested objects withinin `prestidigitation`  tell prestige what it needs to know to talk to Jenkins and Redmine (for now, still need to implement Gitlab API in some way). The only required fields are the `host` and `protocol`. If you use SSL for Jenkins or Redmine, you must specify all of the ssl fields properly, and the user running Prestige must be able to access these files.
 
 ## The Prestige
 
