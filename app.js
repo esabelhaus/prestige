@@ -15,6 +15,6 @@ var express = require('express'),
 
   var prestige = new Prestige(app, 'config/prestige.json');
 
-  app.listen(3000);
+  app.listen(3001);
 
 })();
