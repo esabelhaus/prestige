@@ -43,16 +43,16 @@ Prestige performs all the specified communications based off this config. The ne
 ## The Prestige
 
 ### install
-`npm install prestige`
+`npm install --save prestige`
 
 ### setup
-```
+``` javascript
 var express = require('express'),
     app = express(),
     logger = require('morgan'),
     cookieParser = require('cookie-parser'),
     bodyParser = require('body-parser'),
-    Prestige = require('./lib/prestige');
+    Prestige = require('prestige');
 
 (function(){
   "use strict";
@@ -64,10 +64,60 @@ var express = require('express'),
 
   var prestige = new Prestige(app, 'config/prestige.json');
 
-  app.listen(3000);
+  app.listen(3001);
 
 })();
 ```
+
+### Configuring SSL
+I prefer to use nginx proxying for ssl, it really doesn't add much overhead and its quite simple.
+I use the following for a server config in /etc/nginx/conf.d/prestige.conf
+```
+server {
+    listen 1337 ssl;
+    server_name [my host];
+
+    ssl_certificate /path/to/cert.pem;
+    ssl_certificate_key /path/to/key.key;
+
+    ssl_client_certificate /path/to/ca.pem;
+    ssl_verify_client on;
+    ssl_verify_depth 3;
+
+    ssl_prefer_server_ciphers On;
+    ssl_protocols SSLv3 TLSv1 TLSv1.1 TLSv1.2;
+    ssl_ciphers ECDH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:ECDH+AES128:DH+AES:ECDH+3DES:DH+3DES:RSA+AESGCM:RSA+AES:RSA+3DES:!aNULL:!MD5:!DSS;
+
+    ssl_session_timeout 5m;
+
+    location / {
+        try_files $uri @prestige;
+    }
+
+    location @prestige {
+        # If you use https make sure you disable gzip compression
+        # to be safe against BREACH attack
+        gzip off;
+
+        proxy_read_timeout 300;
+        proxy_connect_timeout 300;
+        proxy_redirect off;
+
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Real-IP $remote_addr;
+
+        proxy_set_header SSL_CLIENT_VERIFY $ssl_client_verify;
+
+        proxy_pass http://localhost:3001;
+    }
+}
+```
+
+The second part of this would be to disable external access to port 3001 via Iptables
+
+Once this is in place, you will be able to perform SSL authentication to prestige over whatever port you set in place of `listen 1337 ssl`
+
 
 # Contributions
 

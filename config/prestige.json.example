@@ -1,8 +1,4 @@
 {
-  "config":{
-    "hostname": "http://example.com",
-    "port": 3000
-  },
   "prestidigitation": {
     "tracking": {
       "host": "example.com",
