@@ -126,6 +126,34 @@ Once this is in place, you will be able to perform SSL authentication to prestig
 ### code of conduct
 I use a combination of Mocha, Chai, and Nock to build out mock endpoints to validate my function calls are properly executed on the intended service to be leveraged. I also use istanbul to validate that 100% code coverage exists before merging a pull request.
 
+### Testing
+
+#### test suite
+```
+npm install
+npm install -g grunt grunt-cli mocha
+grunt
+```
+
+This will run the mocha test suite and jshint to validate no linting errors.
+Be aware, I am pretty strict on cyclomatic complexity, it will blow up
+if you have a level higher than 4 in your functions.
+
+#### test coverage
+```
+npm install -g istanbul
+istanbul cover _mocha test/path/to/test.js
+```
+
+The test files map to their respective file in the lib/prestige directory,
+just replace path/to/test.js with the correct path to the test file
+
+Coverage can be done in two ways.
+1. Test a single function
+ * This will test for 100% coverage on that function in lib/prestige/
+2. Test the full app functionality
+ * This will test the "golden path" to verify prestige as a whole functions correctly
+
 ### start the app
 `grunt start`
 
