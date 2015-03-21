@@ -1,11 +1,8 @@
 # Prestige
-A Server designed to connect distributed applications via their REST API
+A Server module designed to connect distributed applications via their REST API
 
 [![Build Status](https://travis-ci.org/e-sabelhaus/prestige.svg)](https://travis-ci.org/e-sabelhaus/prestige)
 [![Code Climate](https://codeclimate.com/github/e-sabelhaus/prestige/badges/gpa.svg)](https://codeclimate.com/github/e-sabelhaus/prestige)
-
-## The Gist... for now
-Still working through how this will look. Currently, Gitlab talks to Redmine, updating issues based off commit messages in a post commit hook. Now Gitlab to talk to Jenkins, and starts a build on a particular job based off a post commit hook.
 
 ## About
 
@@ -38,7 +35,7 @@ Create a web hook on Gitlab which points to:
 In the config directory, you will find
 `config/prestige.json.example`.
 
-Prestige performs all the specified communications based off this config. The nested objects withinin `prestidigitation`  tell prestige what it needs to know to talk to Jenkins and Redmine (for now, still need to implement Gitlab API in some way). The only required fields are the `host` and `protocol`. If you use SSL for Jenkins or Redmine, you must specify all of the ssl fields properly, and the user running Prestige must be able to access these files.
+Prestige performs all the specified communications based off this config. The nested objects withinin `prestidigitation`  tell prestige what it needs to know to talk to Jenkins and Redmine (for now, still need to implement Gitlab API in some way). The only required fields are the `host` and `protocol`. If you use SSL for Jenkins or Redmine, you must specify all of the ssl fields properly, and the user running Prestige must be able to access the client key/cert and CA files.
 
 ## The Prestige
 

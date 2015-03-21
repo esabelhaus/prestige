@@ -183,13 +183,26 @@ var assert = require('assert'),
       created_on: '2014-12-04T20:30:00Z',
       updated_on: '2014-12-05T17:48:16Z'
     })
-    .get('//projects/foo.json?')
+    .get('//projects/foobar.json?')
     .times(3)
     .reply(200, {
       project:
       { "id": 1,
-        "name": 'foo',
-        "identifier": 'foo',
+        "name": 'foobar',
+        "identifier": 'foobar',
+        "description": '',
+        "status": 1,
+        "created_on": '2014-01-13T16:16:20Z',
+        "updated_on": '2014-05-01T20:15:01Z'
+      }
+    })
+    .get('//projects.json?')
+    .times(3)
+    .reply(200, {
+      project:
+      { "id": 1,
+        "name": 'foobar',
+        "identifier": 'foobar',
         "description": '',
         "status": 1,
         "created_on": '2014-01-13T16:16:20Z',
@@ -276,10 +289,23 @@ var assert = require('assert'),
       created_on: '2014-12-04T20:30:00Z',
       updated_on: '2014-12-05T17:48:16Z'
     })
-    .get('//projects.json?')
+    .get('//projects/foobar.json?')
     .times(3)
     .reply(200, {
-      projects: [
+      project:
+      { "id": 1,
+        "name": 'foobar',
+        "identifier": 'foobar',
+        "description": '',
+        "status": 1,
+        "created_on": '2014-01-13T16:16:20Z',
+        "updated_on": '2014-05-01T20:15:01Z'
+      }
+    })
+    .get('//projects/foo.json?')
+    .times(3)
+    .reply(200, {
+      project:
       { "id": 1,
         "name": 'foo',
         "identifier": 'foo',
@@ -287,18 +313,7 @@ var assert = require('assert'),
         "status": 1,
         "created_on": '2014-01-13T16:16:20Z',
         "updated_on": '2014-05-01T20:15:01Z'
-      },
-      { "id": 2,
-        "name": 'foobar',
-        "identifier": 'foobar',
-        "description": 'foobar',
-        "status": 1,
-        "created_on": '2014-11-21T20:18:53Z',
-        "updated_on": '2014-11-21T20:18:53Z'
-      }],
-      total_count: 2,
-      offset: 0,
-      limit: 25
+      }
     });
 
   var twoRedServPut = nock('http://2redmine.com:80')
