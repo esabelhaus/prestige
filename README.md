@@ -1,11 +1,8 @@
 # Prestige
-A Server designed to connect distributed applications via their REST API
+A Server module designed to connect distributed applications via their REST API
 
 [![Build Status](https://travis-ci.org/e-sabelhaus/prestige.svg)](https://travis-ci.org/e-sabelhaus/prestige)
 [![Code Climate](https://codeclimate.com/github/e-sabelhaus/prestige/badges/gpa.svg)](https://codeclimate.com/github/e-sabelhaus/prestige)
-
-## The Gist... for now
-Still working through how this will look. Currently, Gitlab talks to Redmine, updating issues based off commit messages in a post commit hook. Now Gitlab to talk to Jenkins, and starts a build on a particular job based off a post commit hook.
 
 ## About
 
@@ -38,7 +35,7 @@ Create a web hook on Gitlab which points to:
 In the config directory, you will find
 `config/prestige.json.example`.
 
-Prestige performs all the specified communications based off this config. The nested objects withinin `prestidigitation`  tell prestige what it needs to know to talk to Jenkins and Redmine (for now, still need to implement Gitlab API in some way). The only required fields are the `host` and `protocol`. If you use SSL for Jenkins or Redmine, you must specify all of the ssl fields properly, and the user running Prestige must be able to access these files.
+Prestige performs all the specified communications based off this config. The nested objects withinin `prestidigitation`  tell prestige what it needs to know to talk to Jenkins and Redmine (for now, still need to implement Gitlab API in some way). The only required fields are the `host` and `protocol`. If you use SSL for Jenkins or Redmine, you must specify all of the ssl fields properly, and the user running Prestige must be able to access the client key/cert and CA files.
 
 ## The Prestige
 
@@ -125,6 +122,34 @@ Once this is in place, you will be able to perform SSL authentication to prestig
 
 ### code of conduct
 I use a combination of Mocha, Chai, and Nock to build out mock endpoints to validate my function calls are properly executed on the intended service to be leveraged. I also use istanbul to validate that 100% code coverage exists before merging a pull request.
+
+### Testing
+
+#### test suite
+```
+npm install
+npm install -g grunt grunt-cli mocha
+grunt
+```
+
+This will run the mocha test suite and jshint to validate no linting errors.
+Be aware, I am pretty strict on cyclomatic complexity, it will blow up
+if you have a level higher than 4 in your functions.
+
+#### test coverage
+```
+npm install -g istanbul
+istanbul cover _mocha test/path/to/test.js
+```
+
+The test files map to their respective file in the lib/prestige directory,
+just replace path/to/test.js with the correct path to the test file
+
+Coverage can be done in two ways.
+1. Test a single function
+ * This will test for 100% coverage on that function in lib/prestige/
+2. Test the full app functionality
+ * This will test the "golden path" to verify prestige as a whole functions correctly
 
 ### start the app
 `grunt start`
