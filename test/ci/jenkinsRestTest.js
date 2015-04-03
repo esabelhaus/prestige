@@ -24,7 +24,7 @@ var assert = require('assert'),
     },
     "commits": [{
       "id": "88edeab4b2cd748dbc0e7e7b9e74d2a72a8655d4",
-      "message": "#BuIlD testing",
+      "message": "testing",
       "timestamp": "2014-12-04T20:06:33+00:00",
       "url": "Blah",
       "author": {
@@ -49,7 +49,7 @@ var assert = require('assert'),
     },
     "commits": [{
       "id": "88edeab4b2cd748dbc0e7e7b9e74d2a72a8655d4",
-      "message": "testing",
+      "message": "testing #nO-BuIlD",
       "timestamp": "2014-12-04T20:06:33+00:00",
       "url": "Blah",
       "author": {
@@ -101,7 +101,7 @@ var assert = require('assert'),
     },
     "commits": [{
       "id": "88edeab4b2cd748dbc0e7e7b9e74d2a72a8655d4",
-      "message": "#build this message does contain an issue number",
+      "message": "this message does contain an issue number",
       "timestamp": "2014-12-04T20:06:33+00:00",
       "url": "Blah",
       "author": {

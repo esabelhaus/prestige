@@ -15,6 +15,10 @@ var express = require('express'),
 
   var prestige = new Prestige(app, 'config/prestige.json');
 
+  app.get('/', function(req, res) {
+    res.send('Abracadabra!');
+  });
+
   app.listen(3001);
 
 })();
