@@ -271,7 +271,7 @@ var assert = require('assert'),
       'foo',
       function(res, err){
         should.exist(err);
-        err.should.contain('MISSING: config/prestige.json, please refer to readme for help');
+        err.should.contain('MISSING: config/prestige.json, refer to readme for help');
         if(res){
           done(res);
         }
