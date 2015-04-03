@@ -31,7 +31,7 @@ var express = require('express'),
     },
     "commits": [{
       "id": "88edeab4b2cd748dbc0e7e7b9e74d2a72a8655d4",
-      "message": "testing ci #BuIlD testing tracking #1234",
+      "message": "testing ci & testing tracking #1234",
       "timestamp": "2014-12-04T20:06:33+00:00",
       "url": "Blah",
       "author": {
@@ -57,7 +57,7 @@ var express = require('express'),
     },
     "commits": [{
       "id": "88edeab4b2cd748dbc0e7e7b9e74d2a72a8655d4",
-      "message": "#build this message does contain a build statement",
+      "message": "#no-build this message does contain a build statement",
       "timestamp": "2014-12-04T20:06:33+00:00",
       "url": "Blah",
       "author": {
