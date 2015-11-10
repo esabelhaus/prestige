@@ -166,7 +166,7 @@ var assert = require('assert'),
       created_on: '2014-12-04T20:30:00Z',
       updated_on: '2014-12-05T17:48:16Z'
     })
-    .get('//issues.json?')
+    .get('//issues.json')
     .reply(200, {
       id: 1,
       project: { id: 2, name: 'foobar' },
@@ -196,7 +196,7 @@ var assert = require('assert'),
         "updated_on": '2014-05-01T20:15:01Z'
       }
     })
-    .get('//projects.json?')
+    .get('//projects.json')
     .times(3)
     .reply(200, {
       project:
