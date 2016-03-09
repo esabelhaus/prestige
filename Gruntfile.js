@@ -6,18 +6,19 @@ module.exports = function(grunt) {
       files: ['./lib/**/*.js'],
       // configure JSHint (documented at http://www.jshint.com/docs/)
       options: {
-        maxdepth: 2,
-        maxcomplexity: 4,
+        maxdepth: 4,
+        maxcomplexity: 6,
         strict: true,
         undef: false,
-        eqeqeq: true
+        eqeqeq: true,
+        esnext: true
       },
     },
     plato: {
       coverage: {
         options: {
-          maxdepth: 2,
-          maxcomplexity: 4,
+          maxdepth: 4,
+          maxcomplexity: 6,
           strict: true,
           undef: false,
           eqeqeq: true

@@ -152,6 +152,7 @@ var assert = require('assert'),
   describe('CI:TEST Successful Build HTTPS', function() {
     it('returns a string', function(done){
       ci.startBuild({
+        "log_lvl": "debug",
         "host": "jenkins.com",
         "protocol": "https",
         "port": 443,

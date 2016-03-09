@@ -1,6 +1,7 @@
 {
   "prestidigitation": {
     "tracking": {
+      "log_lvl": "debug",
       "host": "redmine.com",
       "protocol": "https",
       "port": 443,
@@ -8,13 +9,8 @@
       "sslClientCert": "test/server/my-server.crt.pem",
       "sslClientKey": "test/server/my-server.key.pem"
     },
-    "sc": {
-      "url": "gitlab.com",
-      "sslCaCert": "test/server/my-root-ca.crt.pem",
-      "sslClientCert": "test/server/my-server.crt.pem",
-      "sslClientKey": "test/server/my-server.key.pem"
-    },
     "ci": {
+      "log_lvl": "debug",
       "host": "jenkins.com",
       "protocol": "https",
       "port": 443,

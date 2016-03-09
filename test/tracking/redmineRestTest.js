@@ -468,6 +468,25 @@ var assert = require('assert'),
     });
   });
 
+  describe('TRACKING:TEST good get issues request with debugging', function() {
+    it('returns a json object', function(done){
+      tracking.issues({
+        "log_lvl": "debug",
+        "host": "redmine.com",
+        "apiKey": "abcd1234",
+        "protocol": "http",
+        "port": 80
+      },
+      'abcd1234',
+      function(res, err) {
+        should.exist(res);
+        res.should.be.an('object');
+        if (err) return done(err);
+        done();
+      });
+    });
+  });
+
   describe('TRACKING:TEST good get issues request', function() {
     it('returns a json object', function(done){
       tracking.issues({
@@ -499,6 +518,25 @@ var assert = require('assert'),
         should.exist(err);
         err.should.contain("MISSING: config or key!");
         if (res) return done(res);
+        done();
+      });
+    });
+  });
+
+  describe('TRACKING:TEST good get projects request with debugging', function() {
+    it('returns a json object', function(done){
+      tracking.projects({
+        "log_lvl": "debug",
+        "host": "redmine.com",
+        "apiKey": "abcd1234",
+        "protocol": "http",
+        "port": 80
+      },
+      'abcd1234',
+      function(res, err) {
+        should.exist(res);
+        res.should.be.an('object');
+        if (err) return done(err);
         done();
       });
     });
