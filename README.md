@@ -1,8 +1,8 @@
 # Prestige
 A Server module designed to connect distributed applications via their REST API
 
-[![Build Status](https://travis-ci.org/e-sabelhaus/prestige.svg)](https://travis-ci.org/e-sabelhaus/prestige)
-[![Code Climate](https://codeclimate.com/github/e-sabelhaus/prestige/badges/gpa.svg)](https://codeclimate.com/github/e-sabelhaus/prestige)
+[![Build Status](https://travis-ci.org/esabelhaus/prestige.svg)](https://travis-ci.org/e-sabelhaus/prestige)
+[![Code Climate](https://codeclimate.com/github/esabelhaus/prestige/badges/gpa.svg)](https://codeclimate.com/github/e-sabelhaus/prestige)
 
 ## About
 
@@ -155,4 +155,4 @@ Coverage can be done in two ways.
 `grunt start`
 
 # issues
-https://github.com/e-sabelhaus/prestige/issues
+https://github.com/esabelhaus/prestige/issues
