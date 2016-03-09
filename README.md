@@ -155,4 +155,4 @@ Coverage can be done in two ways.
 `grunt start`
 
 # issues
-https://github.com/esabelhaus/prestige/issues
+https://github.com/e-sabelhaus/prestige/issues
