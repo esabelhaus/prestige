@@ -4,11 +4,13 @@ var assert = require('assert'),
     nock = require('nock'),
     expect = chai.expect,
     should = chai.should(),
-    tracking = require('../../lib/prestige/tracking');
+    tracking = require('../../lib/prestige/tracking'),
+    log_factory = require('../../lib/prestige/util/logger');
 
 (function(){
   "use strict";
 
+  var log = log_factory("debug");
   //single fake commit
   var fakePostCommit = {
     "before": "fcc2fd1d57a61d75b64d212ed56c040903b76612",
@@ -335,6 +337,7 @@ var assert = require('assert'),
   describe('TRACKING:TEST Successful Single Update', function() {
     it('returns a string', function(done){
       tracking.updateIssue({
+        "logger": log,
         "host": "redmine.com",
         "apiKey": "abcd1234",
         "protocol": "http",
@@ -355,6 +358,7 @@ var assert = require('assert'),
   describe('TRACKING:TEST No Commits', function() {
     it('returns a string', function(done){
       tracking.updateIssue({
+        "logger": log,
         "host": "redmine.com",
         "apiKey": "abcd1234",
         "protocol": "http",
@@ -375,6 +379,7 @@ var assert = require('assert'),
   describe('TRACKING:TEST Successful Attempt, Project Name Not Matching', function() {
     it('returns a string', function(done){
       tracking.updateIssue({
+        "logger": log,
         "host": "2redmine.com",
         "apiKey": "abcd1234",
         "protocol": "http",
@@ -395,6 +400,7 @@ var assert = require('assert'),
   describe('TRACKING:TEST Successful Multi-Update', function() {
     it('returns a string', function(done){
       tracking.updateIssue({
+        "logger": log,
         "host": "2redmine.com",
         "apiKey": "abcd1234",
         "protocol": "http",
@@ -415,6 +421,7 @@ var assert = require('assert'),
   describe('TRACKING:TEST Successful Attempt, No Issue Number', function() {
     it('returns a string', function(done){
       tracking.updateIssue({
+        "logger": log,
         "host": "redmine.com",
         "apiKey": "abcd1234",
         "protocol": "http",
@@ -435,6 +442,7 @@ var assert = require('assert'),
   describe('TRACKING:TEST Bad Update, No Key', function() {
     it('returns a string', function(done){
       tracking.updateIssue({
+        "logger": log,
         "host": "redmine.com",
         "apiKey": "abcd1234",
         "protocol": "http",
@@ -471,6 +479,7 @@ var assert = require('assert'),
   describe('TRACKING:TEST good get issues request', function() {
     it('returns a json object', function(done){
       tracking.issues({
+        "logger": log,
         "host": "redmine.com",
         "apiKey": "abcd1234",
         "protocol": "http",
@@ -489,6 +498,7 @@ var assert = require('assert'),
   describe('TRACKING:TEST bad get issues request', function() {
     it('returns a string', function(done){
       tracking.issues({
+        "logger": log,
         "host": "redmine.com",
         "apiKey": "abcd1234",
         "protocol": "http",
@@ -507,6 +517,7 @@ var assert = require('assert'),
   describe('TRACKING:TEST good get projects request', function() {
     it('returns a json object', function(done){
       tracking.projects({
+        "logger": log,
         "host": "redmine.com",
         "apiKey": "abcd1234",
         "protocol": "http",
@@ -525,6 +536,7 @@ var assert = require('assert'),
   describe('TRACKING:TEST bad get projects request', function() {
     it('returns a string', function(done){
       tracking.projects({
+        "logger": log,
         "host": "redmine.com",
         "apiKey": "abcd1234",
         "protocol": "http",

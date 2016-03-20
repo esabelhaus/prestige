@@ -1,15 +1,10 @@
 {
   "prestidigitation": {
+    "log_lvl": "info",
     "tracking": {
       "host": "example.com",
       "protocol": "https",
       "port": 443,
-      "sslCaCert": "/path/to/ca/cert.pem",
-      "sslClientCert": "/path/to/cert.pem",
-      "sslClientKey": "/path/to/client.key"
-    },
-    "sc": {
-      "url": "https://example.com",
       "sslCaCert": "/path/to/ca/cert.pem",
       "sslClientCert": "/path/to/cert.pem",
       "sslClientKey": "/path/to/client.key"

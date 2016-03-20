@@ -4,11 +4,13 @@ var assert = require('assert'),
     nock = require('nock'),
     expect = chai.expect,
     should = chai.should(),
-    ci = require('../../lib/prestige/ci.js');
+    ci = require('../../lib/prestige/ci.js'),
+    log_factory = require('../../lib/prestige/util/logger');
 
 (function(){
   "use strict";
 
+  var log = log_factory("debug");
   var fakePostCommit = {
     "before": "fcc2fd1d57a61d75b64d212ed56c040903b76612",
     "after": "9e9a631e3c97b7ed25409760aca15616cd57f9b3",
@@ -152,6 +154,7 @@ var assert = require('assert'),
   describe('CI:TEST Successful Build HTTPS', function() {
     it('returns a string', function(done){
       ci.startBuild({
+        "logger": log,
         "host": "jenkins.com",
         "protocol": "https",
         "port": 443,
@@ -177,6 +180,7 @@ var assert = require('assert'),
   describe('CI:TEST Successful Build HTTP', function() {
     it('returns a string', function(done){
       ci.startBuild({
+        "logger": log,
         "host": "jenkins.com",
         "protocol": "http",
         "port": 80,
@@ -199,6 +203,7 @@ var assert = require('assert'),
   describe('CI:TEST Successful Post Commit No Build HTTP', function() {
     it('returns a string', function(done){
       ci.startBuild({
+        "logger": log,
         "host": "jenkins.com",
         "protocol": "http",
         "port": 80,
@@ -221,6 +226,7 @@ var assert = require('assert'),
   describe('CI:TEST Successful Post Commit Multiple Commit', function() {
     it('returns a string', function(done){
       ci.startBuild({
+        "logger": log,
         "host": "jenkins.com",
         "protocol": "http",
         "port": 80,
@@ -243,6 +249,7 @@ var assert = require('assert'),
   describe('CI:TEST Failed Commit, Bad Project Identifier', function() {
     it('returns a string', function(done){
       ci.startBuild({
+        "logger": log,
         "host": "jenkins.com",
         "protocol": "http",
         "port": 80,
@@ -283,6 +290,7 @@ var assert = require('assert'),
   describe('CI:TEST Failed Commit, Bad Key', function() {
     it('returns a string', function(done){
       ci.startBuild({
+        "logger": log,
         "host": "jenkins.com",
         "protocol": "http",
         "port": 80,
@@ -305,6 +313,7 @@ var assert = require('assert'),
   describe('CI:TEST Failed Setup, No Project Identifier', function() {
     it('returns an object', function(done){
       ci.startBuild({
+        "logger": log,
         "host": "jenkins.com",
         "protocol": "http",
         "port": 80,
@@ -327,6 +336,7 @@ var assert = require('assert'),
   describe('CI:TEST Failed Commit, Bad Key', function() {
     it('returns a string', function(done){
       ci.startBuild({
+        "logger": log,
         "host": "jenkins.com",
         "protocol": "http",
         "port": 80,
