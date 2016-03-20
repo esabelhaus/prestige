@@ -1,7 +1,7 @@
 {
   "prestidigitation": {
+    "log_lvl": "debug",
     "tracking": {
-      "log_lvl": "debug",
       "host": "redmine.com",
       "protocol": "https",
       "port": 443,
@@ -10,7 +10,6 @@
       "sslClientKey": "test/server/my-server.key.pem"
     },
     "ci": {
-      "log_lvl": "debug",
       "host": "jenkins.com",
       "protocol": "https",
       "port": 443,
